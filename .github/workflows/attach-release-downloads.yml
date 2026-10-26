@@ -1,0 +1,36 @@
+name: Attach reviewed release downloads
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/attach-release-downloads.yml
+      - releases/0.11.1-preview/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    if: github.repository == 'Tubbritt/S56K-Editor'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read this release-only repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Verify the reviewed package
+        working-directory: releases/0.11.1-preview
+        run: |
+          printf '%s  %s\n' '7bc96f131172aff00ac261351faffb9f98220c2f77361cececac92e7fb27d5c1' 'S56K-Editor-0.11.1-Preview-win64.zip' | sha256sum --check
+          sha256sum --check S56K-Editor-0.11.1-Preview-win64.zip.sha256
+      - name: Attach the Windows ZIP and checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release upload v0.11.1-preview
+          releases/0.11.1-preview/S56K-Editor-0.11.1-Preview-win64.zip
+          releases/0.11.1-preview/S56K-Editor-0.11.1-Preview-win64.zip.sha256
+          --repo "$GITHUB_REPOSITORY" --clobber

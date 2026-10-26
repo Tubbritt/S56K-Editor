@@ -24,6 +24,6 @@ Get-FileHash -LiteralPath "$env:USERPROFILE\Downloads\S56K-Editor-0.11.1-Preview
 
 Compare its `Hash` with the `.sha256` file attached to the same release. Letter case does not matter. If they differ, download the ZIP again and do not use the mismatched copy.
 
-GitHub also generates archives labelled **Source code** for every release tag. In this repository those archives contain the public documentation and artwork, **not the Editor's application source or its Windows executable**. Use the named Windows ZIP above.
+GitHub also generates archives labelled **Source code** for every release tag. These archives contain this release repository's files, **not the Editor's application source**. They can include documentation, artwork, release configuration and packaged downloads. Use the named Windows ZIP above to install the application.
 
 [Read the 0.11.1 release notes](v0.11.1-preview.md) · [Licence](../LICENSE.md) · [Disclaimer](../DISCLAIMER.md)
