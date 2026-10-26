@@ -12,6 +12,8 @@ This repository contains **compiled releases, user documentation and artwork onl
 4. Point the landing-page download link at those assets. Keep previous releases available for rollback.
 5. Check the public download, checksum, guide links and screenshots after publication.
 
+The repository includes a release-only upload workflow. It checks the reviewed ZIP against a fixed SHA-256 before attaching the ZIP and checksum to its existing release. For a later version, update its version, paths and expected digest together; it never builds the Editor or reads the private development repository.
+
 Preview releases should remain marked as prereleases until their release criteria are met. Links to `/releases/latest` skip prereleases; use the explicit tag or release listing for previews.
 
 ## Repository presentation
