@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/attach-release-downloads.yml
-      - releases/0.11.1-preview/**
+      - releases/0.12.8-preview/**
   workflow_dispatch:
 
 permissions:
@@ -22,15 +22,21 @@ jobs:
         with:
           persist-credentials: false
       - name: Verify the reviewed package
-        working-directory: releases/0.11.1-preview
+        working-directory: releases/0.12.8-preview
         run: |
-          printf '%s  %s\n' '7bc96f131172aff00ac261351faffb9f98220c2f77361cececac92e7fb27d5c1' 'S56K-Editor-0.11.1-Preview-win64.zip' | sha256sum --check
-          sha256sum --check S56K-Editor-0.11.1-Preview-win64.zip.sha256
-      - name: Attach the Windows ZIP and checksum
+          printf '%s  %s\n' 'a17ec5a56754b8687c656cce5d94e0cb7b454af94bbd2704fdcc7b2d573d05e5' 'S56K-Editor-0.12.8-AutoSample-Preview-win64.zip' | sha256sum --check
+          sha256sum --check S56K-Editor-0.12.8-AutoSample-Preview-win64.zip.sha256
+      - name: Prepare draft release and attach verified downloads
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >-
-          gh release upload v0.11.1-preview
-          releases/0.11.1-preview/S56K-Editor-0.11.1-Preview-win64.zip
-          releases/0.11.1-preview/S56K-Editor-0.11.1-Preview-win64.zip.sha256
-          --repo "$GITHUB_REPOSITORY" --clobber
+        run: |
+          if ! gh release view v0.12.8-preview --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create v0.12.8-preview \
+              --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --verify-tag \
+              --title "S56K Editor 0.12.8 Auto Sample Preview" \
+              --notes-file releases/v0.12.8-preview.md --draft --prerelease
+          fi
+          gh release upload v0.12.8-preview \
+            releases/0.12.8-preview/S56K-Editor-0.12.8-AutoSample-Preview-win64.zip \
+            releases/0.12.8-preview/S56K-Editor-0.12.8-AutoSample-Preview-win64.zip.sha256 \
+            --repo "$GITHUB_REPOSITORY" --clobber

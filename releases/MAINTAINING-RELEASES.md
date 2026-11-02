@@ -12,7 +12,7 @@ This repository contains **compiled releases, user documentation and artwork onl
 4. Point the landing-page download link at those assets. Keep previous releases available for rollback.
 5. Check the public download, checksum, guide links and screenshots after publication.
 
-The repository includes a release-only upload workflow. It checks the reviewed ZIP against a fixed SHA-256 before attaching the ZIP and checksum to its existing release. For a later version, update its version, paths and expected digest together; it never builds the Editor or reads the private development repository.
+The repository includes a release-only upload workflow. It checks the reviewed ZIP against a fixed SHA-256, creates a draft prerelease if the version has no release yet, and attaches the ZIP and checksum. Push the reviewed main commit and its matching version tag together; the workflow verifies that tag exists. Verify the uploaded assets before publishing the draft. For a later version, update its tag, paths and expected digest together; it never builds the Editor or reads the private development repository.
 
 Preview releases should remain marked as prereleases until their release criteria are met. Links to `/releases/latest` skip prereleases; use the explicit tag or release listing for previews.
 
@@ -20,7 +20,7 @@ Preview releases should remain marked as prereleases until their release criteri
 
 Suggested About description:
 
-> A modern Windows companion for AKAI S5000 and S6000 samplers. Remote control, sample and program transfers, and classic Akai disk-image libraries.
+> A modern Windows companion for AKAI S5000 and S6000: MIDI keyboard, hardware/VST3 Auto Sample, remote control and library transfers.
 
 Suggested topics: `akai`, `s5000`, `s6000`, `sampler`, `windows`.
 

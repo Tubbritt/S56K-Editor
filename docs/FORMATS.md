@@ -1,6 +1,6 @@
 # Formats and compatibility
 
-[Home](../README.md) · [User guide](USER_GUIDE.md) · [Troubleshooting](TROUBLESHOOTING.md)
+[Home](../README.md) · [User guide](USER_GUIDE.md) · [Auto Sample](AUTO_SAMPLER_GUIDE.md) · [Troubleshooting](TROUBLESHOOTING.md)
 
 **Opening a file or image does not guarantee that every item inside it can be transferred.** The Editor checks the selected sounds and their dependencies before uploading and reports unsupported or ambiguous content.
 
@@ -20,8 +20,51 @@ AKP and AKM files do not contain their sample audio. Keep associated files toget
 - PC waveform input accepts mono/stereo PCM8, PCM16, PCM24, PCM32 or float32, including equivalent extensible headers. Compressed and surround WAVs are not supported.
 - RAM preparation uses the original sample rate when representable, from 1 to 65,535 Hz. It does not resample the audio.
 - Generic WAV loop import supports an integer root note and one forward loop with sufficient audio after the loop end. Fractional tuning/loop offsets and repeat counts are not supported by that conversion path.
-- Recognised native Akai WAV metadata uses its own checks and is not treated as generic WAV metadata. Unrecognised native layouts are refused rather than silently discarded.
-- PC waveform selection and normalisation apply to **Export WAV copy**. Sending to RAM uses the whole selected source file.
+- Recognised native Akai WAV metadata uses its own checks and is not treated as generic WAV metadata. Supported native v1/v2 settings include tuning, playback bounds/mode and zero or one supported loop, including supported fractional settings. Unrecognised native layouts are refused rather than silently discarded.
+- **Export WAV copy** preserves supported native settings in full-range or normalized copies. A trim intersects and rebases playback bounds and intact loops. A cut loop is removed with a review before saving; looped playback is then disabled. A retained active loop needs 15 frames after its inclusive end. A trim leaving no playable audio or insufficient loop guard space is refused.
+- PC waveform selection and normalisation apply to the exported copy. Sending to RAM uses the whole selected source file. PC playback does not apply pending edits or emulate Akai tuning and playback settings.
+
+## Auto Sample sources and output
+
+| Item | Supported in this preview |
+| --- | --- |
+| **Hardware source** | MIDI-controlled instrument connected to a computer MIDI output, with its audio connected to the computer interface's inputs. MIDI alone carries no audio. |
+| **Plugin source** | Compatible **64-bit Windows VST3 instruments**. VST2, AU, AAX and 32-bit plugin bridging are not included. |
+| **Audio devices** | ASIO with the manufacturer's installed 64-bit driver, or supported Windows audio devices. No interface drivers are bundled. |
+| **Live VST3 audition** | Uses the selected audio-interface rate; Test Note supports 96 kHz as well as the export rates. |
+| **Export** | Native S5000/S6000 **AKP + PCM16 WAV**, mono or stereo, at **44.1 or 48 kHz**. Auto Sample does not create AKM Multis. |
+| **Mapping** | Up to **99 keygroups**, **1–4 velocity layers** per keygroup; program key ranges from **A0 (MIDI 21) to G9 (MIDI 127)**. |
+| **Loops** | One sustained forward loop per recording, shared by stereo channels. Optional crossfade and crop-after-loop retain the required interpolation guard frames. |
+| **Capture processing** | Trigger and silence detection, trimming, DC removal, normalization and sustain-loop search. Saved originals can be reprocessed while retained. |
+
+These Auto Sample output restrictions are separate from the existing WAV-transfer
+rules above. A 96 kHz audio device can be used for VST3 audition; it does not make
+96 kHz an Akai Auto Sample export format.
+
+**Accelerated rendering** asks the plugin to process faster than real time.
+Actual speed depends on the instrument and computer. Plugins that need paced
+processing may need this option disabled. Hardware capture follows real time.
+Instruments requiring external devices, online services or real-time-only
+behaviour may not work in accelerated mode. Plugin licensing and content access
+remain the user's responsibility; no instruments or sample libraries are bundled.
+
+The AKP and referenced WAVs are written directly into the selected export folder.
+Internal working recordings, plugin state and recovery files are kept separately;
+see [recording retention and recovery](AUTO_SAMPLER_GUIDE.md#keep-recordings-for-later-reprocessing).
+Keep exported AKP/WAV files together. A project on the PC can exceed sampler RAM,
+but the instrument must fit available memory when loaded into RAM.
+
+## MIDI keyboard routing
+
+A computer MIDI input can control the Akai over its USB card, or Auto Sample's
+selected external MIDI output / loaded VST3. The Auto Sample instrument route
+works without a connected sampler. The Editor does not install a virtual MIDI
+port for other Windows applications, and sampler USB does not carry audio.
+
+The Akai route pauses during file transfers. Auto Sample's instrument route
+pauses during capture, Test Note and instrument/device changes. Late events are
+discarded rather than played afterward; held notes are released when changing
+routes. See the [MIDI setup guide](AUTO_SAMPLER_GUIDE.md#play-from-a-midi-keyboard).
 
 ## Library images
 
@@ -65,8 +108,8 @@ Image-to-disk batches can exceed sample RAM because their files are written to d
 
 ## Release scope
 
-This preview combines remote front-panel operation, PC waveform inspection, instrument transfers, sampler-disk management and supported legacy-image import. Dedicated graphical keygroup/effects editors, an indexed library and automatic loop finding are not included.
+This preview combines remote front-panel operation, MIDI keyboard routing, PC waveform inspection, instrument transfers, sampler-disk management, supported legacy-image import and integrated hardware/VST3 Auto Sample. Automatic loop finding is available for Auto Sample recordings. Dedicated graphical keygroup/effects editors and an indexed library remain outside this release.
 
-Windows 11 on Intel/AMD x64 with an IB-S56USB-equipped S5000/S6000 is the target configuration. Stock OS 2.14 and S56K Expanded Edition are the initial OS targets. Other operating systems, ARM Windows and every sampler expansion/media combination have not been established as supported.
+Windows 11 on Intel/AMD x64 is the target computer configuration. Remote control and transfers require an IB-S56USB-equipped S5000/S6000 with Microsoft WinUSB; stock OS 2.14 and S56K Expanded Edition are the OS targets. PC Auto Sample and its instrument keyboard route do not require the sampler to be connected. Other operating systems, ARM Windows and every sampler expansion/media combination have not been established as supported.
 
-Earlier development builds have been used with sampler hardware for transfers and selected legacy instruments. That experience does not establish every library or hardware combination. The new USB driver assistant has software and offline interface checks; Windows UAC and actual driver reassignment still need broader testing on real PCs.
+Earlier development builds have been used with sampler hardware for transfers and selected legacy instruments. Version 0.12.8 passed 34 native Windows regression tests and its UI smoke test. Automated fixtures do not establish every sampler, audio interface, ASIO driver, plugin or library combination. Start with a small instrument on your setup; Windows driver-selection choices can vary between installations.

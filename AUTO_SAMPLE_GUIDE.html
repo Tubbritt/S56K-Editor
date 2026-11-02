@@ -1,0 +1,416 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>S56K Editor 0.12.8 · PC Auto Sample guide</title><meta name="description" content="Control AKAI S5000 and S6000 samplers, play from a MIDI keyboard, auto-sample hardware and VST3 instruments, and transfer programs over USB."><style>
+:root{color-scheme:light;--ink:#101e2b;--muted:#536575;--line:#dce6ec;--cyan:#007c96;--navy:#0d1823;--paper:#f4f7f9}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);font:16px/1.7 "Segoe UI",system-ui,sans-serif;color:var(--ink)}a{color:var(--cyan);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}.top{background:#fff;border-bottom:1px solid var(--line)}.top-inner{max-width:1240px;margin:auto;padding:38px 28px 34px}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--cyan)}h1{font-size:clamp(36px,6vw,66px);letter-spacing:-.045em;line-height:1.08;margin:15px 0}.intro{max-width:720px;font-size:21px;line-height:1.5;color:var(--muted)}.badge{display:inline-block;padding:6px 12px;border:1px solid var(--line);border-radius:99px;margin:0 8px 8px 0;font-size:12px;font-weight:600}.layout{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:38px;padding:32px 28px 70px}nav{position:sticky;top:26px;align-self:start}nav a{display:block;text-decoration:none;color:var(--ink);padding:10px 13px;margin-bottom:4px;border-radius:8px}nav a:hover{background:#e3f2f5;color:var(--cyan)}nav .label{font-size:11px;letter-spacing:.14em;color:var(--muted);padding:0 13px 9px;font-weight:700}nav hr{border:0;border-top:1px solid var(--line);margin:18px 0}main{min-width:0}article{background:white;border:1px solid var(--line);border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:0 4px 18px #10283805}article>h2{font-size:31px;line-height:1.2;letter-spacing:-.025em;margin:0 0 12px}h3{font-size:24px;letter-spacing:-.02em;line-height:1.3;margin:36px 0 12px;border-top:1px solid var(--line);padding-top:24px}h4{font-size:18px;line-height:1.4;margin:25px 0 9px}p{margin:12px 0}li{padding-left:3px;margin:8px 0}ol,ul{padding-left:25px}figure{margin:24px 0}figure img{display:block;width:100%;height:auto;border:1px solid #152b3d;border-radius:10px;background:#0b1119}figcaption{font-size:12px;color:var(--muted);padding-top:8px}.table-wrap{overflow-x:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:14px;text-align:left}th{background:#eef5f8;line-height:1.5}td,th{padding:12px 14px;border:1px solid var(--line);vertical-align:top}td:first-child{min-width:125px}code{background:#edf4f7;border-radius:4px;padding:2px 5px;font:13px/1.6 Consolas,monospace;overflow-wrap:anywhere}pre{background:var(--navy);padding:18px;border-radius:8px;overflow-x:auto}pre code{background:none;padding:0;color:#d9f4fb;white-space:pre-wrap;overflow-wrap:anywhere}.small,footer{font-size:13px;color:var(--muted)}footer{padding:0 10px 10px}.callout{border-left:3px solid #00a7bf;background:#eff8fa;padding:14px 18px;border-radius:0 7px 7px 0}.section-no{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--cyan);margin-bottom:10px}.legal a{margin-right:15px}@media(max-width:900px){.layout{grid-template-columns:1fr;gap:16px}.layout nav{position:static;display:flex;flex-wrap:wrap;gap:2px}.layout nav .label,.layout nav hr{display:none}.layout nav a{padding:6px 10px;font-size:14px}}@media(max-width:580px){.top-inner{padding:27px 18px}.layout{padding:20px 12px 45px}article{padding:22px 18px;border-radius:10px}.intro{font-size:18px}td,th{padding:9px}}@media print{nav{display:none!important}.layout{display:block;padding:0}article{border:0;padding:10px 0;box-shadow:none}body{background:white}a{color:inherit}figure{break-inside:avoid}h3{break-after:avoid}.top-inner{padding:10px 0}h1{font-size:36px}}
+
+
+
+
+/* EDITOR 0.12.8 ADDITIONS */
+.hero-links{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;font-size:14px}.new{color:#007c96;font-weight:700}.jump-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}.jump-grid a{background:#eef7fa;border:1px solid #d2e8ed;padding:18px;border-radius:10px;text-decoration:none}.jump-grid strong{display:block;margin-bottom:4px}.jump-grid span{font-size:14px;color:#536575}.toc>ul{padding-left:20px}h5{font-size:16px;margin:22px 0 8px}article h3,article h4,article h5{scroll-margin-top:24px}p,li,td,th{overflow-wrap:anywhere}blockquote{border-left:3px solid #00a7bf;background:#eff8fa;margin:20px 0;padding:10px 18px}nav .sub{font-size:12px;padding-left:23px}figure{break-inside:avoid}.pdf-cover,.print-toc{display:none}@media(max-width:580px){.jump-grid{grid-template-columns:1fr}.table-wrap{max-width:100%}td:first-child{min-width:95px}}
+</style></head><body><header class="top"><div class="top-inner"><div class="eyebrow">AKAI S5000 / S6000 · DESKTOP WORKSPACE</div><h1>PC Auto Sample</h1><p class="intro">Play. Capture. Create.<br>Turn your hardware and VST3 instruments into native Akai programs.</p><span class="badge">0.12.8 Auto Sample Preview</span><span class="badge">Windows 11 · Intel/AMD x64</span><span class="badge">Freeware · Offline guide</span><p class="small">No sampler connection is needed for PC Auto Sample. No firmware update is required; the Firmware Updater remains a separate application.</p><div class="hero-links"><a href="https://github.com/Tubbritt/S56K-Editor/releases/tag/v0.12.8-preview">Downloads &amp; release notes</a><a href="docs/S56K-Editor-0.12.8-User-Guide.pdf">Printable PDF manual</a><a href="START_HERE.html">Full Editor guide</a></div></div></header><div class="layout"><nav aria-label="Guide contents"><div class="label">START HERE</div><a href="#autosample-play-from-a-midi-keyboard">MIDI Keyboard</a><a href="#autosample-start-with-a-small-instrument">Quick start</a><a href="#autosample-01-connect">01 · Connect</a><a href="#autosample-02-map-capture">02 · Map &amp; Capture</a><a href="#autosample-03-shape-loop">03 · Shape &amp; Loop</a><a href="#autosample-04-capture-export">04 · Capture &amp; Export</a><hr><a href="START_HERE.html">Full Editor guide</a><hr><a href="https://github.com/Tubbritt/S56K-Editor/releases/tag/v0.12.8-preview">Downloads &amp; updates</a><a href="https://github.com/Tubbritt/S56K-Editor/issues">Report a problem</a><a href="docs/S56K-Editor-0.12.8-User-Guide.pdf">Printable PDF guide</a><a href="LICENSE.md">Freeware licence</a><a href="DISCLAIMER.md">Disclaimer</a><a href="THIRD-PARTY-NOTICES.md">Third-party notices</a></nav><main><article id="autosample"><div class="section-no">01 / S56K EDITOR</div><h2>MIDI Keyboard &amp; PC Auto Sample</h2><p><strong>0.12.8 Auto Sample Preview · Windows 11 x64</strong></p>
+<p>Capture a hardware synth or a VST3 instrument on your computer, then export a
+playable S5000/S6000 program. Start with a few notes and check the result on
+your sampler before recording a large instrument.</p>
+<p>Auto Sample records a hardware or VST3 instrument at selected notes and
+velocities, processes the recordings and creates a program for the AKAI S5000
+and S6000. Choose an <strong>Export folder</strong> for the <strong>AKP program and its WAV samples</strong>.
+Those native files appear directly in that folder, ready to copy or transfer;
+Auto Sample adds no project settings, raw recordings or nested Export folder.
+Working recordings are stored separately on the computer. The sampler can be
+connected later for transfer.</p>
+<p><strong>AUTO SAMPLE</strong> is a workspace inside the Editor, alongside <strong>SAMPLER</strong> and
+<strong>FILES</strong>. Switching workspaces keeps the project and recordings in place.
+Start <code>S56K-Editor.exe</code>; there is no second application to launch. Extract the
+complete ZIP and keep its supporting files together, including the <strong>internal</strong>
+folder. Only <code>S56K-Editor.exe</code> needs to be launched.</p>
+<p>The four main pages use compact controls without a scrolling form. Turn a knob
+or enter an exact value in its field. Audio configuration, MIDI patch setup,
+signal detection and the capture log open in separate dialogs. The recording
+controls appear only on <strong>04 CAPTURE &amp; EXPORT</strong>.</p>
+<h3 id="autosample-what-connects-where">What connects where</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Connection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Play the sampler from a keyboard connected to the PC</td>
+<td>Keyboard MIDI input → Editor → sampler USB. Hear sound from the sampler's audio outputs.</td>
+</tr>
+<tr>
+<td>Play an external synth without the sampler</td>
+<td>Keyboard MIDI input → Editor → Auto Sample's selected computer MIDI output → synth. Hear sound from the synth or your interface's direct monitor.</td>
+</tr>
+<tr>
+<td>Play a loaded VST3 without the sampler</td>
+<td>Keyboard MIDI input → Editor → Auto Sample's loaded instrument → selected computer audio output.</td>
+</tr>
+<tr>
+<td>Sample a hardware synth</td>
+<td>PC MIDI output → synth MIDI input; synth audio outputs → computer audio-interface inputs.</td>
+</tr>
+<tr>
+<td>Sample a VST3 instrument</td>
+<td>Instrument runs on the PC inside Auto Sample. Rendering does not pass through the sampler or its audio outputs.</td>
+</tr>
+<tr>
+<td>Test a completed AKP</td>
+<td>Editor Files → transfer AKP plus its WAV dependencies to sampler RAM or disk.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The sampler's USB connection does not provide audio capture. Connecting a synth
+by MIDI alone cannot record its sound.</p>
+<h3 id="autosample-play-from-a-midi-keyboard">Play from a MIDI keyboard</h3>
+<p><strong>MIDI KEYBOARD</strong> works whether or not an Akai sampler is connected. Select the
+keyboard's Windows MIDI input, choose its destination and click <strong>Connect</strong>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Destination</th>
+<th>Setup and sound output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Akai sampler - USB</strong></td>
+<td>Connect the S5000/S6000, select logical input A or B and the intended MIDI channel. Sound comes from the sampler's audio outputs.</td>
+</tr>
+<tr>
+<td><strong>Auto Sample instrument - external synth / VST3</strong></td>
+<td>On <strong>AUTO SAMPLE → CONNECT</strong>, choose Hardware and its MIDI output, or choose VST3 and load an instrument. This route does not require an Akai connection.</td>
+</tr>
+</tbody>
+</table></div>
+<p>For a hardware synth, connect a computer MIDI output to the synth's MIDI input.
+Select the receiving channel in <strong>MIDI KEYBOARD</strong>; this is the channel used for
+live playing. Auto Sample's own MIDI channel separately controls its test notes
+and automatic capture. Hear the synth through its outputs or your interface's
+direct-monitor facility. The Editor does not enable audio input monitoring.</p>
+<p>For a VST3 instrument, choose the interface and output in <strong>CONNECT → Audio settings</strong>,
+then open <strong>MIDI KEYBOARD</strong>, choose <strong>Auto Sample instrument</strong> and click <strong>Connect</strong>.
+The loaded instrument plays live through that output. It does not require a
+capture project, a Test Note run or an Akai sampler to make sound.</p>
+<p>The first <strong>Connect</strong> starts the instrument helper when needed and waits for
+the route to become ready. The status shows <strong>Connecting...</strong> during startup.
+Use <strong>Disconnect</strong> to stop keyboard input.</p>
+<p>Notes, velocity, pitch bend and supported expressive controls follow the chosen
+route. Use <strong>Panic</strong> if a note remains sounding. Closing the routing window keeps
+input enabled; <strong>Disconnect</strong> disables it. Reopening <strong>MIDI KEYBOARD</strong> shows the
+selected input and routing settings. If a previously selected keyboard is
+unavailable, choose a connected input explicitly. Changing destinations releases
+held notes on the old destination before enabling the new one.</p>
+<p>Manual keyboard playing pauses while Auto Sample records, runs a Test Note or
+changes its instrument/audio configuration. Notes received during that pause
+are discarded so they cannot enter an automatic recording or sound later as a
+burst. Play fresh notes when the instrument is ready again. A keyboard routed
+to Auto Sample remains independent of the Akai USB connection.</p>
+<h4 id="autosample-playing-the-akai-while-editing">Playing the Akai while editing</h4>
+<p>Automatic LCD updates continue while keyboard input is enabled. Keyboard events
+have priority: screen requests can briefly wait for a gap in MIDI activity.
+Reading the display does not release held notes. Very dense controller traffic
+can reduce the display update rate; enabling input alone does not freeze it.</p>
+<p>Remote buttons, the DATA wheel and text entry no longer send an automatic
+all-notes-off command. You can adjust parameters while playing. The sampler
+still processes USB requests in sequence, so very busy control or MIDI input can
+affect responsiveness. A parameter change may itself alter the sound.</p>
+<p>File transfers and other longer USB tasks release held notes and pause the
+<strong>Akai sampler</strong> keyboard route for the complete operation, including gaps
+between batch files. Delayed notes are discarded; play a new note after the task
+to continue. Auto Sample's computer-side instrument route is separate. The
+Editor does not create a Windows virtual MIDI port for other programs.</p>
+<h3 id="autosample-start-with-a-small-instrument">Start with a small instrument</h3>
+<ol>
+<li>Select the <strong>AUTO SAMPLE</strong> workspace in the Editor.</li>
+<li>On <strong>01 CONNECT</strong>, choose <strong>Hardware</strong> or <strong>VST3</strong> and test one note.</li>
+<li>On <strong>02 MAP &amp; CAPTURE</strong>, choose a small range, one velocity layer and short
+   durations. Use the piano keyboard or the Low note / High note fields.</li>
+<li>On <strong>03 SHAPE &amp; LOOP</strong>, initially leave looping and normalization off. Enable
+   trimming if the source has latency or a long silent release.</li>
+<li>On <strong>04 CAPTURE &amp; EXPORT</strong>, choose an <strong>Export folder</strong>, enter a program
+   name, then start. The completed AKP and WAVs go directly into that folder.</li>
+<li>Review the waveform and any warnings. Transfer the exported AKP with its WAV
+   dependencies to the sampler and play it before sampling a larger range.</li>
+</ol>
+<p>For a first test, a few adjacent notes at velocity 100 give a useful check of
+tuning, level, note length and stereo routing without creating a large library.</p>
+<h3 id="autosample-01-connect">01 CONNECT</h3>
+<figure><img alt="Connect a hardware instrument, select audio and MIDI devices, and test its sound" src="assets/screenshots/autosample-ui.png" /><figcaption>Connect a hardware instrument, select audio and MIDI devices, and test its sound</figcaption></figure>
+<p>Choose <strong>Hardware</strong> or <strong>VST3</strong> as the source. The page groups instrument and
+recording controls, showing the settings relevant to that source. Test-note
+controls and a level meter let you check the sound. The connection strip shows
+the current MIDI-keyboard route and audio device.</p>
+<p>Click <strong>Test note</strong> to play the test; the same button becomes <strong>Stop note</strong> so
+you can end it immediately. It returns to <strong>Test note</strong> when the test finishes.</p>
+<p>For <strong>Hardware</strong>, open <strong>Audio settings</strong>, select the audio interface and enable the
+input channel or pair carrying the synth. Choose the MIDI output connected to
+the synth and the channel the synth receives. <strong>MIDI patch setup</strong> holds optional
+Bank MSB/LSB, Program Change and controller messages for selecting the patch and
+its initial controls. Use
+the test note and level meter to set a useful recording level without clipping.
+Stereo needs two source audio outputs and two selected interface inputs.</p>
+<h4 id="autosample-choose-the-audio-driver">Choose the audio driver</h4>
+<p>The <strong>Audio settings</strong> dialog supports <strong>ASIO</strong> as well as Windows audio.
+Install your interface manufacturer's <strong>64-bit Windows ASIO driver</strong> first,
+then select <strong>ASIO</strong> as the audio device type and select that interface. Enable
+the input channels needed for hardware capture and the outputs used for VST3
+playing and take review. ASIO commonly uses one interface for both input and
+output; choose the channels on that device.</p>
+<p>Start with a buffer of <strong>256 or 512 samples</strong> and a supported sample rate.
+Use the driver's control panel if it manages buffer size itself. A smaller
+buffer reduces playing latency but gives the computer less time to process
+complex instruments. If playback crackles or drops out, increase the buffer,
+check the instrument's CPU/disk demands and close other applications using the
+interface. ASIO support does not guarantee dropout-free operation on every
+computer, driver or plugin. No interface driver is bundled with the Editor.</p>
+<p>VST3 <strong>Test note</strong> follows the selected interface rate, including 96 kHz.
+Auto Sample exports remain at <strong>44.1 or 48 kHz</strong>; auditioning at a different
+rate does not change the exported format.</p>
+<p>Windows audio remains available when an ASIO driver is not installed. The
+selected driver affects live VST3 playback, take review and hardware recording.
+Accelerated VST3 rendering runs independently of physical audio timing; changing
+to ASIO does not itself make offline rendering faster.</p>
+<p><strong>Record gain</strong> adjusts the incoming signal digitally from −24 to +24 dB. Set the
+interface's physical input/preamp level first: reducing software gain cannot
+repair clipping that has already happened at the input converter.</p>
+<p>For <strong>VST3</strong>, choose a 64-bit instrument and open its editor to select a sound.
+Set the sound before starting capture; its state is stored with the working project. <strong>Accelerated rendering</strong> asks
+the instrument to render without waiting for real time. Disable it for a plugin
+that needs paced processing. A five-second hardware note always needs physical
+time to play; offline plugin rendering may be faster, depending on the plugin
+and the computer.</p>
+<p>A plugin can have its own latency, disk loading, random variation, copy
+protection or external dependencies. Auto Sample does not guarantee identical
+results across every instrument. An internal helper isolates audio and plugin
+processing from the Editor's USB connection while the workspace remains inside
+the same Editor window. A plugin failure can still interrupt the current take;
+completed recordings remain in the local working session for Resume.</p>
+<h3 id="autosample-02-map-capture">02 MAP &amp; CAPTURE</h3>
+<figure><img alt="Note range, velocity layers and recording times beneath the instrument map" src="assets/screenshots/autosample-ui-capture.png" /><figcaption>Note range, velocity layers and recording times beneath the instrument map</figcaption></figure>
+<p>The <strong>INSTRUMENT MAP</strong> displays the planned notes across velocity rows. Its
+piano keyboard highlights the selected range and marks the notes that will be
+recorded. Drag on the keyboard to move the nearest range edge; <strong>Shift-drag</strong>
+sets the high note. The Low note and High note fields update with the graphic,
+and remain available for precise choices. This keyboard edits the capture
+range; it does not audition notes.</p>
+<p>During a run, the current note and velocity are highlighted in amber. Saved
+takes turn green and pending takes remain subdued. Each velocity layer has its
+own row; a keyboard note becomes green once all its planned layers are saved.</p>
+<p><strong>Low note</strong>, <strong>High note</strong> and <strong>Note step</strong> define the pitch grid. Note names
+use <strong>C4 = MIDI note 60</strong>. Some instruments label the same MIDI note C3; match
+the pitch rather than the octave text if your synth uses another convention.
+Samples fill the selected keyboard range using boundaries halfway between
+recorded notes. Native program keygroups are limited to <strong>A0 (MIDI 21) through
+G9 (MIDI 127)</strong> by the sampler's program loader.</p>
+<p>Choose <strong>one to four velocity layers</strong> with increasing MIDI velocity values.
+Each note is recorded at each selected velocity. The resulting AKP uses up to
+four velocity zones per keygroup and up to 99 keygroups. A finer pitch grid or
+more layers increases both recording time and sample memory. Only the active
+velocity-layer controls are shown.</p>
+<p>The enlarged map fills the main area. Pitch, velocity and timing knobs sit
+below it; there is no separate capture timeline to drag. Use <strong>Note time</strong>,
+<strong>Tail time</strong> and <strong>Gap</strong> to set the individual durations directly. These are
+maximum times, so Auto End may finish a recording before those limits.</p>
+<p>Use <strong>Signal detection</strong> for trigger/end thresholds, timeouts and the early-end
+rule. These detailed controls have their own dialog; the note range and timing
+stay visible on the main page.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Note time</td>
+<td>How long the MIDI note is held, measured from Note On.</td>
+</tr>
+<tr>
+<td>Tail time</td>
+<td>Maximum audio recorded after Note Off, for the release and effects.</td>
+</tr>
+<tr>
+<td>Gap</td>
+<td>Extra settling time between recordings.</td>
+</tr>
+<tr>
+<td>Trigger level</td>
+<td>Level used to identify the beginning of audible signal.</td>
+</tr>
+<tr>
+<td>Signal timeout</td>
+<td>Maximum wait for a usable signal before reporting a failed capture.</td>
+</tr>
+<tr>
+<td>Auto End</td>
+<td>End a recording after audio remains below the end level for the selected silence hold.</td>
+</tr>
+<tr>
+<td>End level</td>
+<td>Level considered silent for automatic ending.</td>
+</tr>
+<tr>
+<td>Silence hold</td>
+<td>How long the level must stay below the end level; a short dip should not end a useful sound.</td>
+</tr>
+<tr>
+<td>Minimum take</td>
+<td>Minimum time after detected onset before Auto End can finish a recording.</td>
+</tr>
+<tr>
+<td>Also finish decaying notes before Note Time</td>
+<td>Allow a naturally decaying sound to finish before the full note duration.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Trigger waiting does not postpone Note Off. Set note time long enough for a slow
+attack to develop. A threshold too high can miss quiet layers; one below a noisy
+hardware input's noise floor may never see silence. Begin with a short test,
+watch the meter and adjust both trigger and end settings for the instrument.</p>
+<p>With Auto End enabled, tail time is a maximum. A ten-second tail can finish
+earlier once the silence rule is satisfied. A sustained sound can use its full
+note time and still have its release recorded after Note Off.</p>
+<h3 id="autosample-03-shape-loop">03 SHAPE &amp; LOOP</h3>
+<figure><img alt="Sustain-loop search region, crossfade and processing controls" src="assets/screenshots/autosample-ui-vst-processing.png" /><figcaption>Sustain-loop search region, crossfade and processing controls</figcaption></figure>
+<p><strong>SUSTAIN LOOP DESIGN</strong> shows the search window within the held note: 0% is
+the start and 100% is Note Off. Enable <strong>Auto Loop</strong>, then drag either search
+boundary or use <strong>Search start</strong> and <strong>Search end</strong> below. This is a
+setup diagram, not a waveform. The recorded waveform is shown on <strong>CAPTURE &amp;
+EXPORT</strong> after real audio is available. Changing the setup diagram does not
+alter an existing recording until you reprocess it.</p>
+<p><strong>Trim start/end</strong> removes audio outside the chosen signal threshold while
+retaining the selected start and end margins. A few milliseconds before the
+detected attack can protect soft transients. <strong>Remove DC</strong> recentres a waveform
+with a constant offset.</p>
+<p>Leave <strong>normalization off</strong> to keep the recorded levels unchanged. <strong>Whole
+project</strong> normalization applies one gain to every capture and preserves their
+relative dynamics. <strong>Each recording</strong> normalization makes every recording reach
+the target peak and therefore changes the relative levels of notes and velocity
+layers. Normalization cannot repair
+clipping that already occurred at the synth or audio interface.</p>
+<p>Loop search runs inside the held-note portion. The <strong>start/end percentages</strong>
+identify the region in which to find a sustained loop; they are not percentages
+of the release tail. Start with a stable sound and a window such as 50–95%.
+Crossfade blends the loop boundary; its percentage is based on the resulting
+loop length. Linear and equal-power curves suit different material, and a long
+crossfade can change the sound.</p>
+<p>Loop search also checks fallback candidates for sparse periodic waveforms
+whose useful boundaries can fall between its initial search positions. Always
+listen to the result before exporting a full instrument.</p>
+<p><strong>Crop after loop</strong> removes release material after the selected loop. A small
+guard area is still written for the sampler's interpolation requirements. This
+is not a second audible release. Stereo channels share loop points and remain
+aligned. Always audition the result: automatic loop matching cannot guarantee a
+natural loop for evolving, random or strongly modulated sounds.</p>
+<h3 id="autosample-04-capture-export">04 CAPTURE &amp; EXPORT</h3>
+<figure><img alt="Capture progress on the note and velocity map, with elapsed time and estimated time left" src="assets/screenshots/autosample-ui-running.png" /><figcaption>Capture progress on the note and velocity map, with elapsed time and estimated time left</figcaption></figure>
+<p>This is the recording page. Choose an <strong>Export folder</strong>, enter the program name
+and start sampling here. During the run, a large keyboard and velocity map
+replaces waveform review:</p>
+<ul>
+<li><strong>Amber / outlined:</strong> the take currently being recorded or processed.</li>
+<li><strong>Green:</strong> a completed, saved take.</li>
+<li><strong>Muted:</strong> a take still waiting to be recorded.</li>
+</ul>
+<p>The display identifies the current phase, note and velocity layer, with saved
+recording totals and percentage. <strong>Elapsed</strong> shows the duration of this run.
+<strong>Estimated remaining</strong> adapts to measured capture speed, including accelerated
+VST3 rendering and early endings. It shows <strong>Estimating</strong> until a take has
+provided a useful measurement. This is an estimate, so changing note lengths or
+processing costs can make it move up or down.</p>
+<p>A resumed run counts previously saved takes correctly and times the new attempt;
+it does not count time spent paused or with the application closed. Once all
+recordings are saved, the display shows export/finalization separately instead
+of promising an exact finish time. The map stays visible through that stage.
+Waveform review returns after the run stops or finishes, so you can inspect and
+listen to the actual files. <strong>Details…</strong> opens the capture notices and log.</p>
+<h4 id="autosample-export-the-native-files">Export the native files</h4>
+<figure><img alt="Capture and export page with the program name, destination and Start Sampling button" src="assets/screenshots/autosample-ui-project.png" /><figcaption>Capture and export page with the program name, destination and Start Sampling button</figcaption></figure>
+<p>The chosen folder receives <code>&lt;program&gt;.AKP</code> and its referenced <code>.WAV</code> samples
+directly. <strong>Open folder</strong> opens this destination; <strong>Open in Files</strong> opens the
+export for transfer in the Editor. The page shows the destination AKP path.</p>
+<p>If matching filenames already contain different data, capture still finishes
+and the Editor asks <strong>Replace existing export files?</strong>. Choose <strong>Replace existing
+files</strong> to approve replacing those AKP/WAV files, or <strong>Keep existing</strong>, choose
+another Export folder and click <strong>Export files</strong>. This retries publication from
+the completed recordings without recording the instrument again. Identical
+files are accepted, and unrelated files in the destination are preserved.</p>
+<p>Cancellation or a failed publication rolls back newly written or replaced
+files. The completed recordings remain available for another export attempt.
+To retain two versions of the same patch, choose separate export folders.</p>
+<h4 id="autosample-record-another-patch">Record another patch</h4>
+<p>Every new capture gets a separate local working session. The Export folder
+can stay the same while you record differently named patches.</p>
+<ul>
+<li><strong>Start Sampling</strong> records the current plan into a new working session. Its label stays the same after a completed run and after reopening the Editor. Settings and the previous export are remembered across launches; a previous export is identified on page 4. Use <strong>New Patch</strong> for a fresh name and review.
+  Existing exports remain until you explicitly approve replacing them.</li>
+<li><strong>New Patch</strong> clears the program name and current review, keeping the loaded
+  instrument, audio/MIDI devices, mapping and processing settings. Select the
+  next sound, enter its name and start another run without closing the Editor.
+  The currently loaded VST3 sound is retained; New Patch does not reload an old
+  preset.</li>
+<li><strong>Resume project</strong> opens retained working recordings and completes missing
+  notes/layers using its saved configuration. Use this to continue an incomplete
+  run, rather than starting another project.</li>
+<li><strong>Reprocess recordings</strong> processes the current project's retained recordings
+  into a new revision. It does not record the instrument again.</li>
+</ul>
+<h4 id="autosample-keep-recordings-for-later-reprocessing">Keep recordings for later reprocessing</h4>
+<p>On Windows, local working sessions live under
+<code>%LOCALAPPDATA%\S56K\Editor\AutoSampleWork</code>. They hold the original floating-point
+recordings, processed masters, saved settings, plugin state when applicable and
+recovery information. <strong>Resume project</strong> starts its folder chooser there.</p>
+<p>By default, completed working recordings are eligible for cleanup when the
+Editor closes normally. Cleanup happens only after the export files and the
+complete working inventory have been verified. It removes the managed working
+data; the AKP and WAVs in your Export folder stay in place. A missing or changed
+export or an unverified working file prevents that cleanup.</p>
+<p>Before closing, enable <strong>Details… → Keep working recordings after closing</strong> if
+you want to reprocess these recordings in a future session. With that option
+off, perform any desired reprocessing before closing. Incomplete, cancelled
+and failed sessions are retained for <strong>Resume</strong>.</p>
+<p>To adjust trimming, looping or normalization after recording, change the
+processing controls and use <strong>Reprocess recordings</strong>. The application uses the
+retained originals and writes a new working revision. Choose another Export
+folder to keep the earlier export for comparison, or approve replacement when
+prompted. Reprocessing keeps the original note grid, velocity layers, sample
+rate and channel count; changing
+those requires a new recording project.</p>
+<p>The saved-recording selector lets you compare <strong>Original recording</strong>,
+<strong>Processed master</strong> and <strong>Export WAV</strong>. Choose a take to inspect its waveform
+and loop markers, then use <strong>Listen</strong> and <strong>Stop</strong> to audition through the
+computer's selected audio output. <strong>Audition loop</strong> appears and is enabled only
+when the selected audio has valid loop markers. It plays the attack and then
+repeats the saved sustain loop; switch it off for a single pass. The toggle takes
+effect during playback and only changes the preview. To create or change a
+loop, adjust <strong>SHAPE &amp; LOOP</strong> and use <strong>Reprocess recordings</strong>. The sampler's
+keygroup envelope still needs a playback check on the instrument. <strong>Refresh</strong>
+rereads the current project's
+saved recordings.</p>
+<p>Keep an exported AKP together with its referenced WAVs when moving or backing
+it up. Do not edit working files during a run. Resume verifies settings
+and existing recordings; a changed or missing capture is reported.</p>
+<p><strong>Pause after take</strong> finishes the current recording before stopping. <strong>Cancel</strong>
+discards the unfinished current take. Both keep recordings already completed.</p>
+<p>The AKP is exported after the complete planned grid is present. If capture stops
+partway through, resume the project to complete the missing notes/layers. A
+silent or failed recording does not create a placeholder sample in the program.</p>
+<h3 id="autosample-transfer-to-the-sampler">Transfer to the sampler</h3>
+<p>After sampling and export verification finish, use <strong>Open in Files</strong> to switch to <strong>FILES</strong>, or select <strong>FILES</strong>
+and open your chosen <strong>Export folder</strong>.
+Select the AKP and include its dependencies, then use <strong>Send to RAM</strong> or
+<strong>Send to Disk</strong> as appropriate. The WAVs contain the actual sound; the AKP
+contains the keygroups, velocity zones and references to those samples.</p>
+<p><strong>Send to RAM</strong> makes the instrument available for testing. Use the sampler's
+normal Save workflow if you want to retain it on its disk. <strong>Send to Disk</strong>
+writes files to the chosen sampler disk location; load the program from there
+when you want to play it. The sampler's available memory still limits how much
+audio can be loaded at once, even when the project is large on the computer.</p>
+<p>For the first test of this feature, leave read-back verification enabled and
+check root pitches, transitions between sampled notes, every velocity layer,
+stereo channels and any loops. Those listening checks complement file
+validation; they establish how the new program behaves on your sampler.</p>
+<p><a href="START_HERE.html#guide">Back to the user guide</a> · <a href="START_HERE.html#help">Troubleshooting</a> · <a href="CHANGELOG.md">Release history</a></p></article><footer><p>Independent community software for AKAI S5000 and S6000. Not affiliated with or endorsed by AKAI Professional.</p><p class="legal"><a href="LICENSE.md">Freeware licence</a><a href="DISCLAIMER.md">Disclaimer</a><a href="THIRD-PARTY-NOTICES.md">Third-party notices</a></p><p>The application's source is private. This distribution contains compiled software, documentation and artwork. Local files and logs are not uploaded automatically.</p></footer></main></div></body></html>

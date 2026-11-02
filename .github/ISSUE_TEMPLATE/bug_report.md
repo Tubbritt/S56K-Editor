@@ -5,8 +5,10 @@ labels: bug
 ---
 **Editor version:**
 **Windows version:**
-**Sampler: S5000 / S6000, installed OS version:**
-**Action: remote control / Send to RAM / Send to Disk / image import / other:**
+**Sampler: S5000 / S6000 and OS version, or no sampler connected:**
+**Action: MIDI Keyboard / Auto Sample / remote control / Send to RAM / Send to Disk / image import / other:**
+**For audio/MIDI issues: interface, driver/type, sample rate, buffer size and MIDI device:**
+**For VST3 issues: instrument name/version and accelerated or real-time rendering:**
 
 **What happened, and what did you expect?**
 

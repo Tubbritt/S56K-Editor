@@ -18,7 +18,17 @@ The project's own application source code is private. It is not included in the 
 
 S56K Editor is independently implemented and uses Microsoft's Windows and WinUSB APIs. It does not incorporate the third-party ak.Sys compatibility shim. Windows and WinUSB remain Microsoft components under their applicable terms; they are not relicensed by this project. The driver-setup assistant opens the Windows driver-selection interface and does not bundle a separate Windows driver.
 
-The Windows executable is built with MinGW-w64/GCC and includes statically linked runtime components, including the MinGW-w64 runtime and winpthreads. These components retain their own notices and licences; the winpthreads MIT/Expat and related file notices are included below. GCC runtime libraries, including libgcc and libstdc++, are provided under the GNU GPL with the GCC Runtime Library Exception; the exception permits eligible compiled applications to be distributed under their own terms. It does not make the S56K application source part of this distribution.
+### Current release: 0.12.8
+
+The current Editor and its internal Auto Sample component are built with Microsoft Visual C++ for Windows x64 using the static runtime. Windows system APIs and components retain their Microsoft terms.
+
+Auto Sample uses **JUCE 9.0.4** through the commercial licensing route, including the qualifying Starter tier. VST3 instruments and manufacturer ASIO drivers retain their own licences and are not bundled. ASIO support uses the independent MIT-licensed interface declarations described in the [Auto Sample notices](AUTOSAMPLE-THIRD-PARTY-NOTICES.md).
+
+The required JUCE, VST3 and supporting-component notices are reproduced in [THIRD-PARTY-LICENSES.txt](THIRD-PARTY-LICENSES.txt). Their terms take precedence over the project's freeware terms for those components.
+
+### Historical release: 0.11.1
+
+The 0.11.1 Windows executable was built with MinGW-w64/GCC and includes statically linked runtime components, including the MinGW-w64 runtime and winpthreads. These components retain their own notices and licences; the winpthreads MIT/Expat and related file notices are included below. GCC runtime libraries, including libgcc and libstdc++, are provided under the GNU GPL with the GCC Runtime Library Exception; the exception permits eligible compiled applications to be distributed under their own terms. It does not make the S56K application source part of this distribution.
 
 The upstream runtime notices and applicable licence texts are reproduced below. The MinGW package notice describes the wider upstream package, including components that may not be linked into the executable. Its inclusion does not assert that every listed component is present. The third-party component terms take precedence over the project's freeware terms for those components.
 

@@ -8,6 +8,8 @@
 
 S56K Editor controls a connected Akai S5000 or S6000 and can transfer sounds, load or save instruments, and create folders on its disks. Remote controls operate the sampler itself. An interrupted transfer, incompatible file, failing disk or USB connection, or undiscovered software fault may cause incomplete operations, loss or corruption of samples, programs, settings or other data.
 
+Auto Sample can record connected instruments, host separately supplied VST3 plugins, process audio and export AKP/WAV files on the computer. MIDI routing can control a connected instrument. Check recording levels, device routing and export destinations, and keep originals when they are needed for later recovery or reprocessing. Plugin and audio-driver compatibility can vary.
+
 The Editor has no firmware-installation feature and includes no sampler firmware BIN. Firmware and the Firmware Updater are separate products with their own instructions and notices. Changing a Windows USB driver is also separate from installing sampler firmware.
 
 Legacy-library conversion and file preparation do not guarantee that every instrument, loop, parameter or image format will be reproduced correctly. Audition imported sounds before relying on them. A successful transfer or checksum check does not establish musical equivalence or protect against every later fault.
