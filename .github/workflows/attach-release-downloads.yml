@@ -1,0 +1,55 @@
+name: Attach reviewed release downloads
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/attach-release-downloads.yml
+      - releases/0.12.9/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    if: github.repository == 'Tubbritt/S56K-Editor'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read this release-only repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Verify the reviewed package
+        working-directory: releases/0.12.9
+        run: |
+          printf '%s  %s\n' '997c82ec724d04084ba43bd9e39da862eda2e70a64fe5d3d2907fe51d3475d75' 'S56K-Editor-0.12.9-win64.zip' | sha256sum --check
+          sha256sum --check S56K-Editor-0.12.9-win64.zip.sha256
+      - name: Prepare draft release and attach verified downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/v0.12.9" --jq .object.sha)" = "$GITHUB_SHA"
+          if ! gh release view v0.12.9 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create v0.12.9 \
+              --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --verify-tag \
+              --title "S56K Editor 0.12.9" \
+              --notes-file releases/v0.12.9.md --draft
+          fi
+          # Published assets are immutable; a rerun verifies them instead of replacing them.
+          if [ "$(gh release view v0.12.9 --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft)" != "true" ]; then
+            mkdir verified-downloads
+            gh release download v0.12.9 --repo "$GITHUB_REPOSITORY" --dir verified-downloads
+            cmp releases/0.12.9/S56K-Editor-0.12.9-win64.zip verified-downloads/S56K-Editor-0.12.9-win64.zip
+            cmp releases/0.12.9/S56K-Editor-0.12.9-win64.zip.sha256 verified-downloads/S56K-Editor-0.12.9-win64.zip.sha256
+            exit 0
+          fi
+          gh release upload v0.12.9 \
+            releases/0.12.9/S56K-Editor-0.12.9-win64.zip \
+            releases/0.12.9/S56K-Editor-0.12.9-win64.zip.sha256 \
+            --repo "$GITHUB_REPOSITORY" --clobber
+          mkdir verified-downloads
+          gh release download v0.12.9 --repo "$GITHUB_REPOSITORY" --dir verified-downloads
+          cmp releases/0.12.9/S56K-Editor-0.12.9-win64.zip verified-downloads/S56K-Editor-0.12.9-win64.zip
+          cmp releases/0.12.9/S56K-Editor-0.12.9-win64.zip.sha256 verified-downloads/S56K-Editor-0.12.9-win64.zip.sha256

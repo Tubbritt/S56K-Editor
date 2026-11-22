@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Editor manual and USB setup
+    url: https://github.com/Tubbritt/S56K-Editor/blob/main/docs/USER_GUIDE.md
+    about: Start here for installation, connection and everyday use.
+  - name: Firmware and standalone Firmware Updater
+    url: https://github.com/Tubbritt/S56K-Expanded-Edition
+    about: The separate sampler firmware and flashing application.

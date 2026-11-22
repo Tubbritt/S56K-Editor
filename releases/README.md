@@ -1,0 +1,29 @@
+# Downloads
+
+[Home](../README.md) · [Changelog](../CHANGELOG.md) · [Manual](../docs/USER_GUIDE.md)
+
+## S56K Editor 0.12.9
+
+| Download | Contents |
+| --- | --- |
+| **[Windows x64 ZIP](https://github.com/Tubbritt/S56K-Editor/releases/download/v0.12.9/S56K-Editor-0.12.9-win64.zip)** | Editor with USB recovery improvements, integrated Auto Sample, illustrated offline/PDF guides, documentation, licence and third-party notices. |
+| **[SHA-256 checksum](https://github.com/Tubbritt/S56K-Editor/releases/download/v0.12.9/S56K-Editor-0.12.9-win64.zip.sha256)** | Check that the downloaded ZIP matches this release. |
+| **[GitHub Release](https://github.com/Tubbritt/S56K-Editor/releases/tag/v0.12.9)** | Versioned download assets and release notes. |
+
+Extract into a new folder. Open **START_HERE.html**, then run **S56K-Editor.exe**. Keep the complete extracted folder together, including **internal**. Only launch S56K-Editor.exe. This is a portable Windows x64 app; no separate runtime installation is required.
+
+The firmware and standalone updater are [separate downloads](https://github.com/Tubbritt/S56K-Expanded-Edition/releases). They are not bundled here.
+
+## Check a download
+
+In PowerShell, run the following using the path to your downloaded ZIP:
+
+```powershell
+Get-FileHash -LiteralPath "$env:USERPROFILE\Downloads\S56K-Editor-0.12.9-win64.zip" -Algorithm SHA256
+```
+
+Compare its `Hash` with the `.sha256` file attached to the same release. Letter case does not matter. If they differ, download the ZIP again and do not use the mismatched copy.
+
+GitHub also generates archives labelled **Source code** for every release tag. These archives contain this release repository's files, **not the Editor's application source**. They can include documentation, artwork, release configuration and packaged downloads. Use the named Windows ZIP above to install the application.
+
+[Read the 0.12.9 release notes](v0.12.9.md) · [Licence](../LICENSE.md) · [Disclaimer](../DISCLAIMER.md)
